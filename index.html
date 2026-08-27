@@ -408,7 +408,6 @@ function initMetaPixel(){
   (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
   META_PIXEL_IDS.forEach(function(id){ window.fbq('init', id); });
   window.fbq('track','PageView');
-  installLeadGuard();
   console.log('[Meta Pixel] Initialized', META_PIXEL_IDS);
 }
 function trackMetaLead(params, eventId){
