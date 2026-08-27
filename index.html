@@ -421,10 +421,12 @@ function trackMetaLead(params, eventId){
 
 var SIGNUP_LEAD_PIXEL = '528225679779379';
 function trackLeadSignup(eventId, params){
-    if (!window.fbq) return;
-    if (alreadyFired(SIGNUP_LEAD_PIXEL)) return;
+    if (!window.fbq){ console.warn('[Meta Pixel] fbq indisponivel'); return; }
+    var key = SIGNUP_LEAD_PIXEL + '_' + (eventId || 'default');
+    if (alreadyFired(key)){ console.warn('[Meta Pixel] Lead ja enviado:', key); return; }
+    markFired(key);
     window.fbq('trackSingle', SIGNUP_LEAD_PIXEL, 'Lead', params || {}, eventId ? {eventID:eventId} : undefined);
-    console.log('[Meta Pixel] Lead enviado no cadastro:', SIGNUP_LEAD_PIXEL);
+    console.log('[Meta Pixel] Lead enviado:', SIGNUP_LEAD_PIXEL, 'eventID:', eventId);
 }
 function trackMetaCustom(name, params){
   if (!window.fbq) return;
